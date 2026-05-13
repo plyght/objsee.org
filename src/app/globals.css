@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a09;
+  --bg-2: #131311;
+  --fg: #ebe7dd;
+  --mid: #76736b;
+  --dim: #3a3833;
+  --line: #1c1b18;
+  --hi:  #ffffff;
+  --t: 0.25s;
+  --cubic: cubic-bezier(0.22, 1, 0.36, 1);
+  --sans: "Public Sans", -apple-system, "SF Pro Text", "SF Pro Display", ui-sans-serif, system-ui, sans-serif;
+  --display: "Vampiro One", "Public Sans", serif;
+
+  --s0: #0a0a09;
+  --s1: #22211d;
+  --s2: #4a4843;
+  --s3: #a8a39a;
+  --s4: #ebe7dd;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f1ede4;
+    --bg-2: #ebe7dc;
+    --fg: #0a0a09;
+    --mid: #6a665d;
+    --dim: #c6c0b1;
+    --line: #d9d4c5;
+    --hi:  #000000;
+    --s0: #f1ede4;
+    --s1: #d9d4c5;
+    --s2: #a8a39a;
+    --s3: #4a4843;
+    --s4: #0a0a09;
+  }
+}
+
+::selection { background: var(--fg); color: var(--bg); }
+
+html, body { min-height: 100dvh; }
+html { background: var(--bg); }
+
+body {
+  font-family: var(--sans);
+  font-optical-sizing: auto;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  text-rendering: optimizeLegibility;
+}
+
+a, button { color: inherit; text-decoration: none; }
+p { text-wrap: pretty; }
+
+.mark {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 0.9;
+  color: var(--fg);
+}
+
+.bio {
+  color: var(--mid);
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.bio b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+/* link: color-only hover, no underline */
+.lnk {
+  color: var(--mid);
+  font-weight: 500;
+  padding: 8px 0;
+  margin: -8px 0;
+  display: inline-block;
+  transition: color var(--t) var(--cubic);
+}
+.lnk:hover { color: var(--hi); }
+.lnk:active { scale: 0.97; }
+
+/* copy interaction — peril-style grid stack fade, no label swap */
+.copy {
+  position: relative;
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  margin: -8px 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--mid);
+  font-weight: 500;
+  display: inline-block;
+  transition: color var(--t) var(--cubic), scale 0.15s var(--cubic);
+}
+.copy:hover { color: var(--hi); }
+.copy:active { scale: 0.97; }
+.copy-swap {
+  display: inline-block;
+  animation: copy-swap-in 0.32s var(--cubic) both;
+}
+@keyframes copy-swap-in {
+  from { opacity: 0; filter: blur(4px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+/* peril-style reveal: opacity + blur, no Y translate */
+@keyframes reveal {
+  from { opacity: 0; filter: blur(8px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+.rv { opacity: 0; animation: reveal 0.9s var(--cubic) both; }
+.rv-1 { animation-delay: 0.05s; }
+.rv-2 { animation-delay: 1.75s; }
+.rv-3 { animation-delay: 1.90s; }
+.rv-4 { animation-delay: 2.05s; }
+.rv-fast-2 { animation-delay: 0.20s; }
+.rv-fast-3 { animation-delay: 0.32s; }
+.rv-fast-4 { animation-delay: 0.44s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { animation: none; opacity: 1; filter: none; }
+}
+
+/* === concept shimmer === */
+
+/* A: boot — grayscale grid cycles per cell, then fades out revealing solid text */
+@keyframes boot-0 {
+  0%   { fill: var(--s0); }
+  20%  { fill: var(--s2); }
+  40%  { fill: var(--s4); }
+  60%  { fill: var(--s3); }
+  80%  { fill: var(--s1); }
+  100% { fill: var(--s4); }
+}
+@keyframes boot-1 {
+  0%   { fill: var(--s1); }
+  25%  { fill: var(--s4); }
+  50%  { fill: var(--s2); }
+  75%  { fill: var(--s3); }
+  100% { fill: var(--s4); }
+}
+@keyframes boot-2 {
+  0%   { fill: var(--s2); }
+  30%  { fill: var(--s0); }
+  60%  { fill: var(--s3); }
+  100% { fill: var(--s4); }
+}
+@keyframes boot-3 {
+  0%   { fill: var(--s3); }
+  20%  { fill: var(--s1); }
+  50%  { fill: var(--s4); }
+  80%  { fill: var(--s2); }
+  100% { fill: var(--s4); }
+}
+@keyframes boot-4 {
+  0%   { fill: var(--s4); }
+  20%  { fill: var(--s0); }
+  40%  { fill: var(--s3); }
+  60%  { fill: var(--s1); }
+  100% { fill: var(--s4); }
+}
+
+.boot-svg { opacity: 1; }
+.boot-cell { fill: var(--s0); }
+
+/* B: pixel patch — continuous color cycle, warm palette */
+:root {
+  --w0: #1a1310;
+  --w1: #3a1f12;
+  --w2: #8a3a1c;
+  --w3: #c75c3c;
+  --w4: #e8c69a;
+  --w5: #f3ece0;
+}
+@keyframes patch-0 {
+  0%, 100% { background: var(--w0); }
+  20% { background: var(--w3); }
+  40% { background: var(--w1); }
+  60% { background: var(--w4); }
+  80% { background: var(--w2); }
+}
+@keyframes patch-1 {
+  0%, 100% { background: var(--w2); }
+  25% { background: var(--w0); }
+  50% { background: var(--w4); }
+  75% { background: var(--w1); }
+}
+@keyframes patch-2 {
+  0%, 100% { background: var(--w3); }
+  30% { background: var(--w5); }
+  60% { background: var(--w1); }
+}
+@keyframes patch-3 {
+  0%, 100% { background: var(--w1); }
+  33% { background: var(--w2); }
+  66% { background: var(--w4); }
+}
+@keyframes patch-4 {
+  0%, 100% { background: var(--w4); }
+  40% { background: var(--w0); }
+  80% { background: var(--w3); }
+}
+
+.patch-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+  aspect-ratio: 1 / 1;
+  width: clamp(80px, 16vw, 140px);
+}
+.patch-cell {
+  border-radius: 1px;
+  animation: patch-0 4s ease-in-out infinite;
+}
+
+/* C: sweep — diagonal stripe sweeps once across the wordmark */
+.sweep-svg {
+  animation: sweep-fadeout 0.4s var(--cubic) 1.5s forwards;
+}
+@keyframes sweep-fadeout { to { opacity: 0; } }
+@keyframes sweep-move {
+  from { transform: translateX(-120%); }
+  to   { transform: translateX(120%); }
+}
+.sweep-band {
+  animation: sweep-move 1.4s var(--cubic) forwards;
+}
+
+/* D: ambient — full-page background field */
+.ambient-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(28, 1fr);
+  grid-auto-rows: 1fr;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.ambient-cell {
+  animation: patch-0 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-svg, .sweep-svg, .patch-cell, .ambient-cell { animation: none !important; }
+  .boot-svg, .sweep-svg { opacity: 0; }
+}
+
+/* concept index cards */
+.card {
+  display: block;
+  padding: 18px 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color var(--t) var(--cubic), background-color var(--t) var(--cubic);
+}
+.card:hover { border-color: var(--mid); background: color-mix(in srgb, var(--bg-2) 80%, var(--fg) 6%); }
