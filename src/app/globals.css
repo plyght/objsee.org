@@ -124,9 +124,9 @@ p { text-wrap: pretty; }
 }
 .rv { opacity: 0; animation: reveal 0.9s var(--cubic) both; }
 .rv-1 { animation-delay: 0.05s; }
-.rv-2 { animation-delay: 1.75s; }
-.rv-3 { animation-delay: 1.90s; }
-.rv-4 { animation-delay: 2.05s; }
+.rv-2 { animation-delay: 1.80s; }
+.rv-3 { animation-delay: 1.95s; }
+.rv-4 { animation-delay: 2.10s; }
 .rv-fast-2 { animation-delay: 0.20s; }
 .rv-fast-3 { animation-delay: 0.32s; }
 .rv-fast-4 { animation-delay: 0.44s; }

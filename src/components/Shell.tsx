@@ -6,8 +6,8 @@ const EMAIL = "me@objsee.org";
 
 export function Bio({ delay = "rv-2" }: { delay?: string }) {
   return (
-    <p className={`rv ${delay} bio text-[15px] sm:text-[16px] max-w-[44ch]`}>
-      <b>low-level C.</b> unix internals, allocators, syscalls — the layer underneath.
+    <p className={`rv ${delay} bio text-[14px] sm:text-[15.5px] max-w-[var(--wordmark-w,16rem)] sm:max-w-[44ch] text-left mx-auto sm:mx-0`}>
+      low-level C developer. kernel and *nix internals.
     </p>
   );
 }
@@ -29,7 +29,7 @@ export function Links({ delay = "rv-3" }: { delay?: string }) {
   useEffect(() => () => { if (t.current) clearTimeout(t.current); }, []);
 
   return (
-    <nav className={`rv ${delay} flex flex-wrap items-center gap-x-7 gap-y-1 text-[14px] sm:text-[15px]`}>
+    <nav className={`rv ${delay} flex flex-wrap items-center justify-start gap-x-5 sm:gap-x-7 gap-y-1 text-[13px] sm:text-[14.5px] max-w-[var(--wordmark-w,16rem)] sm:max-w-[44ch] mx-auto sm:mx-0`}>
       <a className="lnk" href="https://tangled.org/objsee.tngl.sh" target="_blank" rel="noopener noreferrer">
         git
       </a>
